@@ -3,10 +3,175 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Código da Ilha – Edição Free Fire
-// Nível: Mestre
-// Este programa simula o gerenciamento avançado de uma mochila com componentes coletados durante a fuga de uma ilha.
-// Ele introduz ordenação com critérios e busca binária para otimizar a gestão dos recursos.
+//--------------------------
+// NIVEL: NOVATO
+//--------------------------
+
+//================================
+// DEFINIÇÃO DA STRUCT ITEM
+//================================
+
+typedef struct {
+    char nome[30];
+    char tipo[20];
+    int quantidade;
+}Item;
+
+// Vetor que representa a mochila (max de 10 itens)
+Item mochila[10];
+
+// Variavel que controla quantos itens existem na mochila
+int totalItens = 0;
+
+
+
+//==========================
+// Função para listar itens
+//==========================
+
+void listarItens(){
+    printf("\n====== ITENS NA MOCHILA =====\n");
+
+    if (totalItens == 0){
+        printf("Mochila vazia.\n");
+        return;
+    }
+
+    for (int i = 0; i < totalItens; i++){
+        printf("\nItem %d\n", i + 1);
+        printf("Nome: %s\n", mochila[i].nome);
+        printf("Tipo: %s\n", mochila[i].tipo);
+        printf("Quantidade: %d\n", mochila[i].quantidade);
+    }
+}
+
+//==========================
+// Função para inserir item
+//==========================
+
+void inserirItem(){
+
+    if (totalItens >= 10){
+        printf("\nMochila cheia! Não é possivel adicionar mais itens.\n");
+        return;
+    }
+
+    printf("\nDigite o nome do item: ");
+    scanf(" %29[^\n]", mochila[totalItens].nome);
+
+    printf("Digite o tipo (arma, munição, cura...): ");
+    scanf(" %19[^\n]", mochila[totalItens].tipo);
+
+    printf("Digite a quantidade: ");
+    scanf("%d", &mochila[totalItens].quantidade);
+
+    totalItens++;
+
+    printf("\nItem adicionado com sucesso!\n");
+
+    listarItens();
+}
+
+//===============================
+// Função de busca sequencial
+//===============================
+void buscarItem(){
+    if (totalItens == 0){
+        printf("\nMochila vazia.\n");
+        return;
+    }
+
+    char nomeBusca[30];
+    int encontrado = 0;
+
+    printf("\nDigite oo nome do item a buscar: ");
+    scanf(" %29[^\n]", nomeBusca);
+
+    for (int i = 0; i < totalItens; i++){
+        if (strcmp(mochila[i].nome, nomeBusca) == 0){
+
+            printf("\nItem encontrado!\n");
+            printf("Nome: %s\n", mochila[i].nome);
+            printf("Tipo: %s\n", mochila[i].tipo);
+            printf("Quantidade: %d\n", mochila[i].quantidade);
+
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado){
+        printf("\nItem não encontrado.\n");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main() {
     // Menu principal com opções:
