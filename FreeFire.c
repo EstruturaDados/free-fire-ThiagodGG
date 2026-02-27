@@ -84,7 +84,7 @@ void buscarItem(){
     char nomeBusca[30];
     int encontrado = 0;
 
-    printf("\nDigite oo nome do item a buscar: ");
+    printf("\nDigite o nome do item a buscar: ");
     scanf(" %29[^\n]", nomeBusca);
 
     for (int i = 0; i < totalItens; i++){
@@ -105,75 +105,96 @@ void buscarItem(){
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int main() {
+//============================
+// Função para reover ietns
+//============================
+
+void removerItem(){
+
+    if (totalItens == 0){
+        printf("\nMochhila vazia.\n");
+        return;
+    }
+
+    char nomeRemover[30];
+    int posicao = -1;
+
+    printf("\nDigite o nome do item a remover: ");
+    scanf(" %29[^\n]", nomeRemover);
+
+    // Busca de item
+    for (int i = 0; i < totalItens; i++){
+        if (strcmp(mochila[i].nome, nomeRemover) == 0){
+            posicao = i;
+            break;
+        }
+    }
+
+    if (posicao == -1){
+        printf("\nItem não encontrado.\n");
+        return;
+    }
+
+    // Desloca os itens para preencher o espaço removido
+    for (int i = posicao; i < totalItens - 1; i++){
+        mochila[i] = mochila[i + 1];
+    }
+
+    totalItens--;
+    printf("\nItem removido com sucesso!/n");
+    listarItens;
+}
+
+
+//=============================
+// Função prinncipal
+//=============================
+
+int main(){
+
+    int opcao;
+
+    do {
+        printf("\n=========== MOCHILA ============\n");
+        printf("1 - Inserir item\n");
+        printf("2 - Remover item\n");
+        printf("3 - Listar itens\n");
+        printf("4 - Buscar item\n");
+        printf("0 - Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao){
+            case 1:
+            inserirItem();
+            break;
+
+            case 2:
+            removerItem();
+            break;
+
+            case 3:
+            listarItens();
+            break;
+
+            case 4:
+            buscarItem();
+            break;
+
+            case 0:
+            printf("\nSaindo da Mochila...\n");
+            break;
+
+            default:
+            printf("Opção Inalida!\n");
+
+        }
+    } while (opcao != 0);
+
+
+    return 0;
+}
+// int main() {
     // Menu principal com opções:
     // 1. Adicionar um item
     // 2. Remover um item
@@ -185,8 +206,8 @@ int main() {
     // A estrutura switch trata cada opção chamando a função correspondente.
     // A ordenação e busca binária exigem que os dados estejam bem organizados.
 
-    return 0;
-}
+  //  return 0;
+// }
 
 // Struct Item:
 // Representa um componente com nome, tipo, quantidade e prioridade (1 a 5).
